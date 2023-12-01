@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+.userName{
+    display: flex;
+    flex-direction: row;
+    gap:3px;
+    background-color: rgb(37,99,235);
+    border-radius: 5px 0 0 5px;
+    padding-left: 10px;
+    transition: background-color 0.2s;
+}
+.userName img{
+    width: 20px;
+    height: 20px;
+    margin-block-start: 0.9rem;
+    filter:invert(1);
+}
+.userName p{
+    white-space: nowrap;
+}
+.logout{
+    display: flex;
+    flex-direction: row;
+    gap:3px;
+    background-color: rgb(37,99,235);
+    border-radius: 0 5px 5px 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: background-color 0.2s;
+}
+.logout img{
+    width: 20px;
+    height: 20px;
+    margin-block-start: 0.9rem;
+    filter:invert(1);
+}
+.user{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    flex-grow: 1;
+    height: 3rem;
+    width: 14rem;
+    color:white;
+    margin-top:1rem;
+}
+
+.userName:hover, .logout:hover{
+    background-color: rgb(29,78,216);
+    cursor: pointer;
+}
+tr{
+    transition: background-color 0.2s;
+}
+td{
+    transition: background-color 0.8s;
+}
+tr:hover{
+    background-color: ghostwhite;
+}
+td:hover{
+    background-color:rgba(29,78,216,0.3);
+
+}
+
+.page_header{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+}
+.logo{
+    width: 70px;
+    height: 70px;
+}
+.info{
+    display: flex;
+    flex-direction: row;
+    gap:1rem;
+}
+.info div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.info p{
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+.blue{
+    color:rgb(37,99,235);
+}

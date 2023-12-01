@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аутенфикация</title>
+    <link rel="stylesheet" href="signin.css">
+    <link rel="shortcut icon" href="mirea.png" type="image/x-icon">
+    <script src="signin.js"></script>
+</head>
+<body>
+    <div class = "login">
+        <img class = "logo" src="mirea.png">
+        <h2>Регистрация</h2>
+        <form id ="login_form">
+            <input id = "email" type="email" placeholder="Email" required>
+            <input id = "password" type="password" placeholder="Пароль" required>
+            
+            <button class="login_button" form="login_form"><img class = "lock" src="lock.svg">Войти</button>
+            <button class = "reg" form="" onclick="start()">Зарегистрироваться</button>
+        </form>
+    </div>
+    <footer>
+        <p>Колышкин А.В. ИКБО-20-22</p>
+    </footer>
+</body>
+</html>

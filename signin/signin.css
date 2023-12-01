@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap');
+body {
+    margin-top:3rem;
+    background-color:rgb(243 244 246);
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+h2{
+    font-size: 2rem;
+}
+form{
+    display: flex;
+    flex-direction: column;
+
+}
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#email,#password{
+    width: 28rem;
+    height: 2.2rem;
+    text-indent: 0.8rem;
+    font-family: 'Outfit', sans-serif;
+    font-size:1rem;
+    border: 1px solid rgb(172, 172, 172);
+    box-sizing: border-box;
+    margin:0.5rem;
+    border-radius: 5px;
+}
+#email:focus, #password:focus{
+    outline: none;
+}
+#email::placeholder, #password::placeholder{
+    font-size: 1rem;
+}
+.logo{
+    width: 96px;
+    height: 96px;
+}
+.login_button{
+    font-family: 'Outfit', sans-serif;
+    margin-top: 1.5rem;
+    height: 2.3rem;
+    background-color: rgb(37,99,235);
+    color:white;
+    font-size: 0.85rem;
+    font-weight:bolder;
+    border: none;
+    border-radius: 5px;
+    transition: transform 2s;
+    position: relative;
+}
+.login_button:hover, .reg:hover{
+    background-color: rgb(29,78,216);
+}
+.lock{
+    width: 20px;
+    height: 20px;
+    filter: invert(100%) opacity(0.5);
+    position: absolute;
+    left:3%;
+}
+.login_button:hover .lock{
+    filter: invert(100%) opacity(1);
+}
+.reg{
+    font-family: 'Outfit', sans-serif;
+    margin-top: 0.5rem;
+    height: 2.3rem;
+    background-color: rgb(37,99,235);
+    color:white;
+    font-size: 0.85rem;
+    font-weight:bolder;
+    border: none;
+    border-radius: 5px;
+    transition: transform 2s;
+    position: relative;
+}
+footer{
+    display: flex;
+    position: absolute;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    left:0;
+    bottom: 0;
+}
+@media only screen and (max-width: 767px) {
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #email,#password{
+        width: 20rem;
+    }
+
+}
