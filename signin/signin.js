@@ -1,3 +1,4 @@
+console.log('js works');
 function start(){
     var request = indexedDB.open("myDatabase", 1);
 
