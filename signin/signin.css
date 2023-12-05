@@ -63,7 +63,7 @@ input[type="radio"]{
     border-radius: 0 5px 5px 0;
 }
 .student:hover, .teacher:hover{
-    background-color: rgb(29,78,216);
+    background-color: rgb(29,78,216) !important;
     cursor: pointer;
 }
 input:focus{

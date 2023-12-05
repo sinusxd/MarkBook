@@ -13,11 +13,6 @@
         <img class = "logo" src="mirea.png">
         <h2>Регистрация</h2>
         <form id ="login_form">
-            
-            <input id = "name" type="text" placeholder="Имя" required>
-            <input id = "surname" type="text" placeholder="Фамилия" required>
-            <input id = "secondName" type="text" placeholder="Отчество" required>
-            <input id = "email" type="email" placeholder="Почта" required>
             <div class = "role">
                 <p>Ваша роль: </p>
                 <div class = "selectRole">
@@ -25,7 +20,13 @@
                     <div class = "teacher"><p>Преподаватель</p></div>
                 </div>
             </div>
-            <button class = "reg" form="" onclick="start()">Зарегистрироваться</button>
+            <input id = "name" type="text" placeholder="Имя" required>
+            <input id = "surname" type="text" placeholder="Фамилия" required>
+            <input id = "secondName" type="text" placeholder="Отчество" required>
+            <input id = "email" type="email" placeholder="Почта" required>
+            <input id = "password" type="password" placeholder="Пароль" required>
+            <input id = "repeatPassword" type="password" placeholder="Повторите пароль" required>
+            <button class = "reg">Зарегистрироваться</button>
         </form>
     </div>
     <footer>
