@@ -23,7 +23,8 @@
         </div>
     </div>
     <div class="info">
-        <p>Username</p>
+        <p style="font-weight: bold;">Выбранный студент:</p>
+        <p class = "infoName">Username</p>
         <div>
             <p class="blue">Группа:</p>
             <p class = "group">UserGroup</p>
@@ -47,7 +48,7 @@
         <tbody>
             <tr>
                 <td>21.06.2023</td>
-                <td>Математическая логика и теория алгоритмов</td>
+                <td contenteditable="true">Математическая логика и теория алгоритмов</td>
                 <td>Экзамен</td>
                 <td>72 часа</td>
                 <td>2 семестр 2022/2023</td>
@@ -63,6 +64,9 @@
             </tr>
         </tbody>
     </table>
-    
+    <button class="Btn" onclick="add()">
+        <div class="sign"><p>+</p></div>
+        <div class="text">Добавить</div>
+    </button>
 </body>
 </html>

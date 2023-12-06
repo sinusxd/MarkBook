@@ -83,6 +83,7 @@ td:hover{
 
 }
 
+
 .page_header{
     display: flex;
     position: relative;
@@ -99,7 +100,8 @@ td:hover{
 }
 .info div{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap:5px;
     justify-content: center;
     align-items: center;
 }
@@ -110,3 +112,64 @@ td:hover{
 .blue{
     color:rgb(37,99,235);
 }
+
+
+.Btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: rgb(37,99,235);
+  }
+  
+
+  .sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 0.5rem;
+  }
+  .Btn p{
+    color:white;
+    font-size: 2rem;
+  }
+
+  .text {
+    position: absolute;
+    right: -5%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition-duration: .3s;
+  }
+  .Btn:hover {
+    width: 125px;
+    transition-duration: .3s;
+    background-color: rgb(29,78,216);
+  }
+  
+
+  .Btn:hover .text {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
+    background-color: rgb(29,78,216);
+  }
+
+  .Btn:active {
+    transform: translate(2px ,2px);
+  }
