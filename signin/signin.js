@@ -1,11 +1,48 @@
 let clicked = 0;
+function createCourse(){
+    let input = document.createElement('input');
+    input.placeholder = "Курс";
+    input.id = "course";
+    input.type = "number";
+    input.required = true;
+    return input;
+}
 
+function createGroup(){
+    let input = document.createElement('input');
+    input.placeholder = "Номер группы";
+    input.id = "group";
+    input.type = "text";
+    input.pattern="^[А-Я]{4}-\d{2}-\d{2}$";
+    input.required = true;
+    return input;
+}
+let course = createCourse();
+let group = createGroup();
+group.addEventListener('input', function (event) {
+    let inputValue = event.target.value;
+
+    if (event.target.value.length <= 4) {
+        inputValue = event.target.value.replace(/[^А-Я]/g, event.target.value);
+    } else if (event.target.value.length > 4) {
+        inputValue = inputValue.replace(/[^А-Я]\d{4}\d{0,2}/g, event.target.value.slice(0, 4) + '-' + event.target.value.slice(4, 6));
+        console.log(inputValue);
+    }
+
+    event.target.value = inputValue.toUpperCase();
+
+});
 document.addEventListener('DOMContentLoaded', function () {
     let teacher = document.querySelector('.teacher');
     let student = document.querySelector('.student');
 
     teacher.addEventListener('click', function () {
+        let form = document.getElementById('login_form');
         if (!clicked) {
+            if(form.contains(course))
+                form.removeChild(course);
+            if(form.contains(group))
+                form.removeChild(group);
             teacher.style.backgroundColor = "rgb(29,78,216)";
             student.style.backgroundColor = "rgb(37,99,235)";
             clicked = 1;
@@ -16,11 +53,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     student.addEventListener('click', function () {
+        let form = document.getElementById('login_form');
         if (clicked) {
             student.style.backgroundColor = "rgb(29,78,216)";
             teacher.style.backgroundColor = "rgb(37,99,235)";
             clicked = 0;
-        } else {
+            form.insertBefore(course, document.getElementById("email"));
+            form.insertBefore(group, document.getElementById("email"));
+        } 
+        else {
+            if(form.contains(course))
+                form.removeChild(course);
+            if(form.contains(group))
+                form.removeChild(group);
             student.style.backgroundColor = "rgb(37,99,235)";
             clicked = 1;
         }
@@ -89,6 +134,7 @@ openDB.onsuccess = function (event) {
             email: email,
             password: password,
             role: role,
+            lessons:null,
         };
         console.log(newUser);
 
