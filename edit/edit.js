@@ -5,10 +5,6 @@ document.addEventListener('DOMContentLoaded',function(){
     document.querySelector('.group').textContent = user.group;
     document.querySelector('.course').textContent = user.course;
     document.querySelector('.logout').addEventListener('click',logout);
-    let tds = document.querySelectorAll('td');
-    for(let i = 0 ; i < tds.length; ++i){
-        tds[i].addEventListener('click',edit);
-    }
 });
 
 function createInput(index){
@@ -34,7 +30,11 @@ function add(){
     let tr = document.createElement('tr');
     for(let i = 0 ; i < 6; ++i){
         let td = document.createElement('td');
-        td.contentEditable='true';
+        if(i !=0){
+            td.contentEditable='true';
+            td.addEventListener('input',check);
+        }
+        else td.addEventListener('click',edit);
         tr.appendChild(td);
     }
     document.querySelector('tbody').appendChild(tr);
@@ -44,6 +44,8 @@ function edit(event){
     let target = event.target;
     let input = createInput(target.cellIndex);
     let textContent = target.textContent;
+    if(target.cellIndex == 0)
+        textContent = parseDate(textContent);
     input.value = textContent;  
     target.textContent = "";
     target.appendChild(input);
@@ -53,10 +55,36 @@ function confirm(event){
     let input = event.target;
     let td = input.parentElement;
     let value = input.value;
+    if(input.type == "date")
+        if(value)
+            value = formatDate(value);
+    td.removeChild(input);
     td.textContent = value;
 }
 function formatDate(inputDate) {
-    const parts = inputDate.split('-');
-    const formattedDate = parts[1] + '.' + parts[2] + '.' + parts[0];
+    let parts = inputDate.split('-');
+    let formattedDate = parts[2] + '.' + parts[1] + '.' + parts[0];
     return formattedDate;
+}
+function parseDate(inputDate) {
+    let parts = inputDate.split('.');
+    let parsedDate = parts[2] + '-' + parts[1] + '-' + parts[0];
+    return parsedDate;
+}
+function check(event){
+    let target = event.target;
+    if(target.cellIndex == 5){
+        let sanitizedValue = target.textContent.replace(/[^2-5]/g, '');
+        sanitizedValue = sanitizedValue.slice(0, 1);
+        event.target.textContent = sanitizedValue;
+        if(event.target.textContent == 5)
+            event.target.textContent += " (Отлично)"
+        if(event.target.textContent == 4)
+            event.target.textContent += " (Хорошо)"
+        if(event.target.textContent == 3)
+            event.target.textContent += " (Удовлетворительно)"
+        if(event.target.textContent == 2)
+            event.target.textContent += " (Неудовлетворительно)"
+
+    }
 }
