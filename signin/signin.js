@@ -10,26 +10,28 @@ function createCourse(){
 
 function createGroup(){
     let input = document.createElement('input');
-    input.placeholder = "Номер группы";
+    input.placeholder = "Номер группы XXXX-XX-XX";
     input.id = "group";
     input.type = "text";
-    input.pattern="^[А-Я]{4}-\d{2}-\d{2}$";
+    input.pattern="^[А-Я]{4}-\\d{2}-\\d{2}$";
     input.required = true;
+    input.style.transition = "background-color 0.5s";
     return input;
 }
 let course = createCourse();
 let group = createGroup();
 group.addEventListener('input', function (event) {
     let inputValue = event.target.value;
-
-    if (event.target.value.length <= 4) {
-        inputValue = event.target.value.replace(/[^А-Я]/g, event.target.value);
-    } else if (event.target.value.length > 4) {
-        inputValue = inputValue.replace(/[^А-Я]\d{4}\d{0,2}/g, event.target.value.slice(0, 4) + '-' + event.target.value.slice(4, 6));
-        console.log(inputValue);
+    let regex = /^[А-Я]{4}-\d{2}-\d{2}$/;
+    if(regex.test(inputValue)){
+        event.target.style.backgroundColor = "#98FB98";
     }
-
-    event.target.value = inputValue.toUpperCase();
+    else{
+        if(inputValue == "")
+            event.target.style.backgroundColor = "white";
+        else
+            event.target.style.backgroundColor = "#F08080";
+    }
 
 });
 document.addEventListener('DOMContentLoaded', function () {
@@ -86,9 +88,12 @@ openDB.onupgradeneeded = function (event) {
             objectStore.createIndex("name", "name", { unique: false });
             objectStore.createIndex("surname", "surname", { unique: false });
             objectStore.createIndex("secondName", "secondName", { unique: false });
+            objectStore.createIndex("course", "course", { unique: false });
+            objectStore.createIndex("group", "group", { unique: false });
             objectStore.createIndex("email", "email", { unique: true });
             objectStore.createIndex("password", "password", { unique: false });
             objectStore.createIndex("role", "role", { unique: false });
+            objectStore.createIndex("lessons", "lessons", { unique: false });
         }
     } catch (error) {
         console.error("Error creating object store:", error);
@@ -105,6 +110,8 @@ openDB.onsuccess = function (event) {
         const name = document.getElementById("name").value;
         const surname = document.getElementById("surname").value;
         const secondName = document.getElementById("secondName").value;
+        const course = document.getElementById("course").value;
+        const group = document.getElementById("group").value;
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         const repeatPassword = document.getElementById("repeatPassword").value;
@@ -131,6 +138,8 @@ openDB.onsuccess = function (event) {
             name: name,
             surname: surname,
             secondName: secondName,
+            course: course,
+            group: group,
             email: email,
             password: password,
             role: role,

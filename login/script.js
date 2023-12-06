@@ -54,7 +54,8 @@ function login() {
                     // Passwords match, login successful
                     console.log("Login successful!");
                     // Redirect to another page or perform other actions
-                    localStorage.setItem('user',user);
+                    localStorage.setItem('user',JSON.stringify(user));
+                    window.location.href = "/main/main.html";
                 } else {
                     alert("Incorrect password. Please try again.");
                 }
@@ -74,6 +75,3 @@ function login() {
     };
 }
 
-function goToMain(user){
-    
-}
