@@ -1,6 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap');
-body{
-    font-family:Arial, Helvetica, sans-serif
+body {
+    font-family: Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
 }
 .userName{
     display: flex;
@@ -40,6 +58,7 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: end;
+    flex-grow: 1;
     height: 3rem;
     width: 14rem;
     color:white;
@@ -49,6 +68,19 @@ body{
 .userName:hover, .logout:hover{
     background-color: rgb(29,78,216);
     cursor: pointer;
+}
+tr{
+    transition: background-color 0.2s;
+}
+td{
+    transition: background-color 0.8s;
+}
+tr:hover{
+    background-color: ghostwhite;
+}
+td:hover{
+    background-color:rgba(29,78,216,0.3);
+
 }
 
 .page_header{
@@ -60,33 +92,21 @@ body{
     width: 70px;
     height: 70px;
 }
-h1{
+.info{
     display: flex;
+    flex-direction: row;
+    gap:1rem;
+}
+.info div{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    flex-grow: 1;
+    align-items: center;
 }
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+.info p{
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
-
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-tr{
-    transition: background-color 0.2s;
-}
-tr:hover{
-    background-color: ghostwhite;
-    cursor: pointer;
+.blue{
+    color:rgb(37,99,235);
 }
