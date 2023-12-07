@@ -173,3 +173,12 @@ td:hover{
   .Btn:active {
     transform: translate(2px ,2px);
   }
+
+  #plus, #min{
+    display: none;
+  }
+
+
+  .list{
+    border: 1px solid red;
+  }

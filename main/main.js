@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded',function(){
     document.querySelector('.info p').textContent = user.surname + " " + user.name[0] + ". " + user.secondName[0] + '.';
     document.querySelector('.group').textContent = user.group;
     document.querySelector('.course').textContent = user.course;
-    document.querySelector('.logout p').addEventListener('click',logout);
+    document.querySelector('.logout').addEventListener('click',logout);
 });
 
 

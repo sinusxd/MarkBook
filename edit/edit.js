@@ -30,11 +30,30 @@ function add(){
     let tr = document.createElement('tr');
     for(let i = 0 ; i < 6; ++i){
         let td = document.createElement('td');
-        if(i !=0){
-            td.contentEditable='true';
-            td.addEventListener('input',check);
+        if(i == 0 ){
+            td.addEventListener('click',edit);
         }
-        else td.addEventListener('click',edit);
+        if(i == 2){
+            td.addEventListener('click',select);
+        }
+        if(i == 3){
+            td.contentEditable = 'true';
+            td.addEventListener('input',parseTime);
+        }
+        
+        if(i == 1 || i == 4)
+            td.contentEditable = 'true';
+
+        if(i == 5){
+            let button1 = document.createElement('button');
+            let button2 = document.createElement('button');
+            button1.textContent = "+";
+            button2.textContent = "-";
+            button1.onclick = "addToDB";
+            button2.addEventListener('click',remove);
+            td.appendChild(button1);
+            td.appendChild(button2);
+        }
         tr.appendChild(td);
     }
     document.querySelector('tbody').appendChild(tr);
@@ -87,4 +106,66 @@ function check(event){
             event.target.textContent += " (Неудовлетворительно)"
 
     }
+}
+function addToDB(){
+
+}
+function remove(event){
+    let button2 = event.target;
+    let td = button2.parentNode; // Получаем ячейку с кнопками
+    let tr = td.parentNode; // Получаем строку (родительскую ячейку)
+    let tbody = document.querySelector('tbody');
+    tbody.removeChild(tr);
+}
+
+
+function select(event){
+    let target = event.target;
+    if(target.querySelector('select'))
+        return;
+    if(target.textContent == "Экзамен" || target.textContent == "Зачёт"){
+        target.textContent = "";
+    }
+        
+    let sel = document.createElement('select');
+    let optionStart = document.createElement('option');
+    optionStart.value = "Вид контроля";
+    optionStart.textContent = "Вид контроля";
+    let option1 = document.createElement('option');
+    let option2 = document.createElement('option');
+    option1.value = "Экзамен";
+    option1.textContent = "Экзамен";
+    option2.value = "Зачёт";
+    option2.textContent = "Зачёт";
+    sel.appendChild(optionStart);
+    sel.appendChild(option1);
+    sel.appendChild(option2);
+    sel.style.border = "none";
+    sel.style.outline = "none";
+    target.appendChild(sel);
+    sel.addEventListener('change',function(event){
+        let target = event.target;
+        let parent = target.parentNode;
+        parent.textContent = target.value;
+    });
+}
+function parseTime(event){
+    console.log('change');
+    let number = event.target.textContent;
+    function formatHours(number) {
+        if (!/^-?\d*\.?\d+$/.test(number)) {
+            return "Неверный формат числа";
+        }
+    
+        let hours = parseFloat(number);
+    
+        if (isNaN(hours)) {
+            return "Не является числом";
+        }
+    
+        let hoursText = hours === 1 ? "час" : "часов";
+        return `${hours} ${hoursText}`;
+    }
+    number = formatHours(number);
+    event.target.textContent = number;
 }
