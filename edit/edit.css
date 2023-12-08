@@ -182,3 +182,23 @@ td:hover{
   .list{
     border: 1px solid red;
   }
+
+  .bad{
+    background-color: rgba(255, 0, 0, 0.493);
+    transition: background-color 0.2s;
+  }
+
+  .buttons{
+    background-color: rgb(37,99,235);
+    border: none;
+    color:white;
+    margin: 1px;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    transition: background-color 0.5s, transform 0.2s;
+  }
+  .buttons:hover{
+    background-color: rgb(29,78,216);
+    transform: scale(1.1);
+  }

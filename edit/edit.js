@@ -20,6 +20,22 @@ function createInput(index){
     
     return input
 }
+function createButtons(){
+    let button1 = document.createElement('button');
+    let button2 = document.createElement('button');
+    let div = document.createElement('div');
+    button1.textContent = "+";
+    button2.textContent = "-";
+    button1.addEventListener('click',addToDB);
+    button2.addEventListener('click',remove);
+    div.appendChild(button1);
+    div.appendChild(button2);
+    div.style.display = "flex";
+    div.style.flexDirection = "row";
+    button1.classList.add('buttons');
+    button2.classList.add('buttons');
+    return div;
+}
 function logout(){
     console.log('logout');
     localStorage.removeItem('user');
@@ -38,7 +54,8 @@ function add(){
         }
         if(i == 3){
             td.contentEditable = 'true';
-            td.addEventListener('input',parseTime);
+            td.addEventListener('input',validateInput);
+            td.addEventListener('blur',parseTime);
         }
         
         if(i == 1 || i == 4)
@@ -47,12 +64,22 @@ function add(){
         if(i == 5){
             let button1 = document.createElement('button');
             let button2 = document.createElement('button');
+            let div = document.createElement('div');
             button1.textContent = "+";
             button2.textContent = "-";
             button1.onclick = "addToDB";
             button2.addEventListener('click',remove);
-            td.appendChild(button1);
-            td.appendChild(button2);
+            div.appendChild(button1);
+            div.appendChild(button2);
+            div.style.display = "flex";
+            div.style.flexDirection = "row";
+            button1.classList.add('buttons');
+            button2.classList.add('buttons');
+            td.append(div);
+            td.style.display = "flex";
+            td.style.flexDirection = "row";
+            td.style.justifyContent = "flex-end";
+            td.addEventListener('click',selectMark);
         }
         tr.appendChild(td);
     }
@@ -90,29 +117,12 @@ function parseDate(inputDate) {
     let parsedDate = parts[2] + '-' + parts[1] + '-' + parts[0];
     return parsedDate;
 }
-function check(event){
-    let target = event.target;
-    if(target.cellIndex == 5){
-        let sanitizedValue = target.textContent.replace(/[^2-5]/g, '');
-        sanitizedValue = sanitizedValue.slice(0, 1);
-        event.target.textContent = sanitizedValue;
-        if(event.target.textContent == 5)
-            event.target.textContent += " (Отлично)"
-        if(event.target.textContent == 4)
-            event.target.textContent += " (Хорошо)"
-        if(event.target.textContent == 3)
-            event.target.textContent += " (Удовлетворительно)"
-        if(event.target.textContent == 2)
-            event.target.textContent += " (Неудовлетворительно)"
-
-    }
-}
 function addToDB(){
 
 }
 function remove(event){
     let button2 = event.target;
-    let td = button2.parentNode; // Получаем ячейку с кнопками
+    let td = button2.parentNode.parentNode; // Получаем ячейку с кнопками
     let tr = td.parentNode; // Получаем строку (родительскую ячейку)
     let tbody = document.querySelector('tbody');
     tbody.removeChild(tr);
@@ -123,6 +133,7 @@ function select(event){
     let target = event.target;
     if(target.querySelector('select'))
         return;
+    
     if(target.textContent == "Экзамен" || target.textContent == "Зачёт"){
         target.textContent = "";
     }
@@ -149,23 +160,114 @@ function select(event){
         parent.textContent = target.value;
     });
 }
+function validateInput(event) {
+    let nonNumberPattern = /\D/;
+    let target = event.target;
+    target.textContent = target.textContent.replace(nonNumberPattern,'');
+}
 function parseTime(event){
-    console.log('change');
-    let number = event.target.textContent;
-    function formatHours(number) {
-        if (!/^-?\d*\.?\d+$/.test(number)) {
-            return "Неверный формат числа";
-        }
-    
-        let hours = parseFloat(number);
-    
-        if (isNaN(hours)) {
-            return "Не является числом";
-        }
-    
-        let hoursText = hours === 1 ? "час" : "часов";
-        return `${hours} ${hoursText}`;
+    let target = event.target;
+    if(!target.textContent)
+        return;
+    let hours = parseInt(target.textContent,10);
+    let lastDigit = hours % 10;
+    let lastTwoDigits = hours % 100;
+
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+        target.textContent = `${hours} часов`;
+    } else if (lastDigit === 1) {
+        target.textContent = `${hours} час`;
+    } else if (lastDigit >= 2 && lastDigit <= 4) {
+        target.textContent = `${hours} часа`;
+    } else {
+        target.textContent = `${hours} часов`;
     }
-    number = formatHours(number);
-    event.target.textContent = number;
+}
+
+function selectMark(event){
+    let target = event.target;
+    if(target.nodeName == "BUTTON")
+        return;
+    if (target.nodeName == "SELECT")
+        target = target.parentNode;
+    if(target.querySelector('select'))
+        return;
+    
+    let exam = target.parentNode.querySelectorAll('td')[2];
+
+    if(!exam.textContent || exam?.querySelector('select')?.value == "Вид контроля"){
+        exam.classList.add('bad');
+        setTimeout(()=>{exam.classList.remove('bad');},1500);
+        return;
+    }
+    else{
+        target.innerHTML = "";
+    }
+    if(exam.textContent == "Зачёт"){
+        let sel = document.createElement('select');
+        let optionStart = document.createElement('option');
+        optionStart.value = "Оценка";
+        optionStart.textContent = "Оценка";
+        let option1 = document.createElement('option');
+        let option2 = document.createElement('option');
+        option1.value = "Зачёт";
+        option1.textContent= "Зачёт";
+        option2.value = "Незачёт";
+        option2.textContent= "Незачёт";
+        sel.appendChild(optionStart);
+        sel.appendChild(option1);
+        sel.appendChild(option2);
+        sel.style.border = "none";
+        sel.style.outline = "none";
+        target.prepend(sel);
+        sel.parentNode.style.justifyContent = "flex-start";
+        sel.parentNode.style.gap = "5px";
+        sel.addEventListener('change',function(event){
+            let target = event.target;
+            let parent = target.parentNode;
+            parent.removeChild(target);
+            let buttons = createButtons();
+            parent.innerHTML = "";
+            parent.textContent = target.value;
+            parent.appendChild(buttons);
+            
+        });
+    }
+    if(exam.textContent == "Экзамен"){
+        let sel = document.createElement('select');
+        let optionStart = document.createElement('option');
+        optionStart.value = "Оценка";
+        optionStart.textContent = "Оценка";
+        let option1 = document.createElement('option');
+        let option2 = document.createElement('option');
+        let option3 = document.createElement('option');
+        let option4 = document.createElement('option');
+        option1.value = "Отлично";
+        option1.textContent= "Отлично";
+        option2.value = "Хорошо";
+        option2.textContent= "Хорошо";
+        option3.value = "Удовлетворительно";
+        option3.textContent= "Удовлетворительно";
+        option4.value = "Неудовлетворительно";
+        option4.textContent= "Неудовлетворительно";
+        sel.appendChild(optionStart);
+        sel.appendChild(option1);
+        sel.appendChild(option2);
+        sel.appendChild(option3);
+        sel.appendChild(option4);
+        sel.style.border = "none";
+        sel.style.outline = "none";
+        target.prepend(sel);
+        sel.parentNode.style.justifyContent = "flex-start";
+        sel.parentNode.style.gap = "5px";
+        sel.addEventListener('change',function(event){
+            let target = event.target;
+            let parent = target.parentNode;
+            parent.removeChild(target);
+            let buttons = createButtons();
+            parent.innerHTML = "";
+            parent.textContent = target.value;
+            parent.appendChild(buttons);
+        });
+    }
 }
