@@ -67,7 +67,7 @@ function add(){
             let div = document.createElement('div');
             button1.textContent = "+";
             button2.textContent = "-";
-            button1.onclick = "addToDB";
+            button1.addEventListener('click',addToDB);
             button2.addEventListener('click',remove);
             div.appendChild(button1);
             div.appendChild(button2);
@@ -117,8 +117,27 @@ function parseDate(inputDate) {
     let parsedDate = parts[2] + '-' + parts[1] + '-' + parts[0];
     return parsedDate;
 }
-function addToDB(){
-
+function addToDB(event){
+    let target = event.target.parentNode.parentNode.parentNode.childNodes;
+    let good = true;
+    for(let i = 0 ; i < 6; ++i){
+        if(!target[i].textContent || target[i].textContent == "+-"){
+            good = false;
+            target[i].classList.add('bad');
+            setTimeout(()=>{target[i].classList.remove('bad');},1500);
+        }
+    }
+    if(!good)
+        return;
+    target[5].querySelector('div').removeChild(target[5].querySelectorAll('button')[0]);
+    for(let i = 0 ; i < 6; ++i){
+        target[i].contentEditable = 'false';
+        let newElement = target[i].cloneNode(true);
+        target[i].parentNode.replaceChild(newElement, target[i]);
+    }
+    target[5].querySelector('div button').addEventListener('click',remove);
+    
+   
 }
 function remove(event){
     let button2 = event.target;
