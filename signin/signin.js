@@ -110,8 +110,8 @@ openDB.onsuccess = function (event) {
         const name = document.getElementById("name").value;
         const surname = document.getElementById("surname").value;
         const secondName = document.getElementById("secondName").value;
-        const course = document.getElementById("course").value;
-        const group = document.getElementById("group").value;
+        const course = document.getElementById("course")?.value;
+        const group = document.getElementById("group")?.value;
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         const repeatPassword = document.getElementById("repeatPassword").value;
@@ -152,7 +152,7 @@ openDB.onsuccess = function (event) {
         // Handle the success or error of the transaction
         addUserRequest.onsuccess = function () {
             console.log("Registration successful!");
-            window.location.href = "/main/main.html";
+            window.location.href = "../login/index.html";
         };
 
         addUserRequest.onerror = function () {

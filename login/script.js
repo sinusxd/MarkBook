@@ -55,7 +55,9 @@ function login() {
                     console.log("Login successful!");
                     // Redirect to another page or perform other actions
                     localStorage.setItem('user',JSON.stringify(user));
-                    window.location.href = "/main/main.html";
+                    if(user.group == null)
+                        window.location.hre = "../tmain/tmain.html"
+                    window.location.href = "../main/main.html";
                 } else {
                     alert("Incorrect password. Please try again.");
                 }

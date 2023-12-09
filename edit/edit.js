@@ -1,12 +1,74 @@
-document.addEventListener('DOMContentLoaded',function(){
-    let user = JSON.parse(localStorage.getItem('user'));
+window.onbeforeunload = loadLessons;
+let currentStudent = JSON.parse(localStorage.getItem('currentStudent'));
+let user = JSON.parse(localStorage.getItem('user'));
+document.addEventListener('DOMContentLoaded',function(){   
+    if(localStorage.getItem('user') == null)
+        this.location.assign('../login/index.html');
+    if(user.group != null)
+        this.location.assign('../main/main.html');
     document.querySelector('.userName p').textContent = user.surname + " " + user.name[0] + ". " + user.secondName[0] + '.';
-    document.querySelector('.infoName').textContent = user.surname + " " + user.name[0] + ". " + user.secondName[0] + '.';
-    document.querySelector('.group').textContent = user.group;
-    document.querySelector('.course').textContent = user.course;
+    document.querySelector('.infoName').textContent = currentStudent.surname + " " + currentStudent.name[0] + ". " + currentStudent.secondName[0] + '.';
+    document.querySelector('.group').textContent = currentStudent.group;
+    document.querySelector('.course').textContent = currentStudent.course;
     document.querySelector('.logout').addEventListener('click',logout);
+    loadLessons();
 });
-
+function loadLessons(){
+    currentStudent = JSON.parse(localStorage.getItem('currentStudent'));
+    currentStudent = goToStudent(currentStudent.id);
+    currentStudent = JSON.parse(localStorage.getItem('currentStudent'));
+    let lessons = currentStudent.lessons;
+    if(!lessons)
+        return;
+    for(let i = 0 ; i < lessons.length; ++i){
+        let tr = document.createElement('tr');
+        let lesson = lessons[i];
+        for(let j = 0 ; j < 6; ++j){
+            let td = document.createElement('td');
+            if(j == 5){
+                let button = document.createElement('button');
+                let div = document.createElement('div');
+                button.textContent = "-";;
+                button.addEventListener('click',remove);
+                div.appendChild(button);
+                div.style.display = "flex";
+                div.style.flexDirection = "row";
+                div.style.position = "absolute";
+                div.style.right = "1%";
+                div.style.bottom = "20%";
+                button.classList.add('buttons');
+                td.append(div);
+                td.style.position="relative";
+            }
+            tr.appendChild(td);
+        }
+        document.querySelector('tbody').appendChild(tr);
+        tr = tr.childNodes;
+        tr[0].textContent = lesson.date;
+        tr[1].textContent = lesson.name;
+        tr[2].textContent = lesson.type;
+        tr[3].textContent = lesson.duration;
+        tr[4].textContent = lesson.time;
+        tr[5].prepend(lesson.mark);
+    }
+    
+}
+function goToStudent(id){
+    let openDB = indexedDB.open("registrationDB",1);
+    openDB.onsuccess = function (event) {
+        let db = event.target.result;
+        let transaction = db.transaction("users", "readonly");
+        let objectStore = transaction.objectStore("users");
+        let desiredId = id
+        let getRequest = objectStore.get(desiredId);
+        getRequest.onsuccess = function(event){
+            let record = getRequest.result;
+            localStorage.setItem('currentStudent',JSON.stringify(record));
+        }
+        db.close;
+    };
+    
+}
 function createInput(index){
     let input = document.createElement('input');
     input.addEventListener('blur',confirm);
@@ -32,6 +94,9 @@ function createButtons(){
     div.appendChild(button2);
     div.style.display = "flex";
     div.style.flexDirection = "row";
+    div.style.position = "absolute";
+    div.style.right = "1%";
+    div.style.bottom = "20%";
     button1.classList.add('buttons');
     button2.classList.add('buttons');
     return div;
@@ -73,12 +138,13 @@ function add(){
             div.appendChild(button2);
             div.style.display = "flex";
             div.style.flexDirection = "row";
+            div.style.position = "absolute";
+            div.style.right = "1%";
+            div.style.bottom = "20%";
             button1.classList.add('buttons');
             button2.classList.add('buttons');
             td.append(div);
-            td.style.display = "flex";
-            td.style.flexDirection = "row";
-            td.style.justifyContent = "flex-end";
+            td.style.position="relative";
             td.addEventListener('click',selectMark);
         }
         tr.appendChild(td);
@@ -118,6 +184,7 @@ function parseDate(inputDate) {
     return parsedDate;
 }
 function addToDB(event){
+    
     let target = event.target.parentNode.parentNode.parentNode.childNodes;
     let good = true;
     for(let i = 0 ; i < 6; ++i){
@@ -136,15 +203,61 @@ function addToDB(event){
         target[i].parentNode.replaceChild(newElement, target[i]);
     }
     target[5].querySelector('div button').addEventListener('click',remove);
+    let lesson = {
+        date: target[0].textContent,
+        name: target[1].textContent,
+        type: target[2].textContent,
+        duration: target[3].textContent,
+        time: target[4].textContent,
+        mark: target[5].textContent.split('-')[0]
+
+    };
+    let openDB = indexedDB.open("registrationDB",1);
+    openDB.onsuccess = function(event){
+        let db = event.target.result;
+        let transaction = db.transaction("users","readwrite");
+        let objectStore  = transaction.objectStore("users");
+        let getRequest = objectStore.get(currentStudent.id);
+        getRequest.onsuccess = function(event){
+            let record = event.target.result;
+            if(record.lessons == null)
+                record.lessons = [];
+            record.lessons.push(lesson);
+            console.log(record);
+            objectStore.put(record);
+        };
+    };
     
    
 }
 function remove(event){
+    let target = event.target.parentNode.parentNode.parentNode.childNodes;
     let button2 = event.target;
     let td = button2.parentNode.parentNode; // Получаем ячейку с кнопками
     let tr = td.parentNode; // Получаем строку (родительскую ячейку)
     let tbody = document.querySelector('tbody');
     tbody.removeChild(tr);
+    let openDB = indexedDB.open("registrationDB",1);
+    let lesson = {
+        date: target[0].textContent,
+        name: target[1].textContent,
+        type: target[2].textContent,
+        duration: target[3].textContent.split(' ')[0],
+        time: target[4].textContent,
+        mark: target[5].textContent.split('+-')[0]
+
+    };
+    openDB.onsuccess = function(event){
+        let db = event.target.result;
+        let transaction = db.transaction("users","readwrite");
+        let objectStore  = transaction.objectStore("users");
+        let getRequest = objectStore.get(currentStudent.id);
+        getRequest.onsuccess = function(event){
+            let record = event.target.result;
+            record.lessons.splice(record.lessons.indexOf(record),1);
+            objectStore.put(record);
+        };
+    };
 }
 
 
@@ -248,6 +361,7 @@ function selectMark(event){
             let buttons = createButtons();
             parent.innerHTML = "";
             parent.textContent = target.value;
+            parent.style.position = "relative";
             parent.appendChild(buttons);
             
         });
@@ -285,6 +399,7 @@ function selectMark(event){
             parent.removeChild(target);
             let buttons = createButtons();
             parent.innerHTML = "";
+            parent.style.position = "relative";
             parent.textContent = target.value;
             parent.appendChild(buttons);
         });

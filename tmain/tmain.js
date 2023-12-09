@@ -1,7 +1,11 @@
 let allRecords = [];
+let id = [];
 function pasteStudents(){
     for(let i = 0 ; i < allRecords.length; ++i){
+        if(!allRecords[i].group)
+            continue;
         let tr = document.createElement('tr');
+        tr.addEventListener('click',goToStudent);
         let td = document.createElement('td');
         td.textContent = i + 1;
         tr.appendChild(td);
@@ -14,12 +18,35 @@ function pasteStudents(){
         td = document.createElement('td');
         td.textContent = allRecords[i].group;
         tr.appendChild(td);
+        tr.id = allRecords[i].id;
         document.querySelector('tbody').appendChild(tr);
-        console.log('i');
     }
 }
+function goToStudent(event){
+    let openDB = indexedDB.open("registrationDB",1);
+    let target = event.target.parentNode;
+    openDB.onsuccess = function (event) {
+        let db = event.target.result;
+    
+        // Начинаем транзакцию для чтения
+        let transaction = db.transaction("users", "readonly");
+        let objectStore = transaction.objectStore("users");
+    
+        
+        let desiredId = target.id;
+        let record = allRecords[desiredId-1];
+        localStorage.setItem('currentStudent',JSON.stringify(record));
+        window.location.href = '../edit/edit.html';
+        db.close;
+    };
+    
+}
 document.addEventListener('DOMContentLoaded', function(){
+    if(localStorage.getItem('user') == null)
+        this.location.assign('../login/index.html');
     let user = JSON.parse(localStorage.getItem('user'));
+    if(user.group != null)
+        this.location.assign('../main/main.html');
         // Открываем или создаем базу данных
     let openDB = indexedDB.open("registrationDB", 1);
 
@@ -50,11 +77,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
             // Если есть записи, добавляем их в массив
             if (cursor) {
+                id.push(cursor.key);
                 allRecords.push(cursor.value);
                 cursor.continue();
             } else {
-                // Курсор закончил перебор записей
-                console.log("Все записи:", allRecords);
 
                 // Завершаем транзакцию
                 transaction.oncomplete = function () {
