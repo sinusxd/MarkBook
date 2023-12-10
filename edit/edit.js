@@ -18,11 +18,15 @@ document.addEventListener('DOMContentLoaded',function(){
 // Function to handle window resize
 function handleResize() {
     let table = document.querySelectorAll('tr');
-    console.log('resize');
     if (window.innerWidth <= 576) {
         for(let i = 0 ; i < table.length; ++i){
             table[i].style.display = "flex";
             table[i].style.flexDirection = "column";
+            if(i == 0)
+                continue;
+            for(let j = 0 ; j < table[i].childNodes.length; ++j){
+                table[i].childNodes[j].style.height = "2rem";
+            }
         }
     } else {
         for(let i = 0 ; i < table.length; ++i){

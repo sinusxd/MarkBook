@@ -90,3 +90,22 @@ tr:hover{
     background-color: ghostwhite;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 576px) {
+    body{
+        display: flex;
+        flex-direction:column;
+    }
+    h1{
+        font-size: 1rem;
+    }
+    .page_header{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .user{
+        position: absolute;
+        right: 0;
+    }
+}

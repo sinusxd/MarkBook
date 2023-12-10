@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', function(){
     let user = JSON.parse(localStorage.getItem('user'));
     if(user.group != null)
         this.location.assign('../main/main.html');
-        // Открываем или создаем базу данных
+    document.querySelector('.userName p').textContent = user.surname + " " + user.name[0] + ". " + user.secondName[0] + ".";
+    document.querySelector('.logout').addEventListener('click',logout);
     let openDB = indexedDB.open("registrationDB", 1);
 
     // Обработчик события, вызываемый при обновлении базы данных
@@ -98,3 +99,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 });
+function logout(){
+    localStorage.removeItem('user');
+    window.location.href = "../login/index.html";
+}   
