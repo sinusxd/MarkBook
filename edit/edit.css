@@ -17,6 +17,7 @@ th, td {
     text-align: left;
 }
 
+
 th {
     background-color: #f2f2f2;
 }
@@ -202,3 +203,39 @@ td:hover{
     background-color: rgb(29,78,216);
     transform: scale(1.1);
   }
+
+  /* Your existing CSS */
+
+/* Add this inside your existing CSS */
+@media only screen and (max-width: 576px) {
+  .page_header{
+    display: flex;
+    flex-direction: column;
+  }
+  h1{
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .user{
+    position: absolute;
+    right: 0;
+  }
+  .info{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+@media only screen and (max-width: 340px){
+  .logo{
+    display: none;
+  }
+  .user{
+    position: relative;
+  }
+  .page_header{
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+}
+

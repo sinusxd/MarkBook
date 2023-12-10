@@ -1,3 +1,32 @@
+
+function pasteLessons(){
+    let user = JSON.parse(localStorage.getItem('user'));
+    let lessons = user.lessons;
+    for(let i = 0 ; i < lessons.length; ++i){
+        let lesson = lessons[i];
+        let tr = document.createElement('tr');
+        let td = document.createElement('td');
+        td.textContent = lesson.date;
+        tr.append(td);
+        td = document.createElement('td');
+        td.textContent = lesson.name;
+        tr.append(td);
+        td = document.createElement('td');
+        td.textContent = lesson.type;
+        tr.append(td);
+        td = document.createElement('td');
+        td.textContent = lesson.duration;
+        tr.append(td);
+        td = document.createElement('td');
+        td.textContent = lesson.time;
+        tr.append(td);
+        td = document.createElement('td');
+        td.textContent = lesson.mark;
+        tr.append(td);
+        document.querySelector('tbody').append(tr);
+    }
+}
+
 document.addEventListener('DOMContentLoaded',function(){
     if(localStorage.getItem('user') == null)
         window.location.href = "../login/index.html";
@@ -9,10 +38,12 @@ document.addEventListener('DOMContentLoaded',function(){
     document.querySelector('.group').textContent = user.group;
     document.querySelector('.course').textContent = user.course;
     document.querySelector('.logout').addEventListener('click',logout);
+    pasteLessons();
+        
 });
 
 
 function logout(){
     localStorage.removeItem('user');
     window.location.href = "../login/index.html";
-}
+}   

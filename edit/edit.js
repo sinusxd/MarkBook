@@ -1,4 +1,6 @@
 window.onbeforeunload = loadLessons;
+window.addEventListener('resize', handleResize);
+
 let currentStudent = JSON.parse(localStorage.getItem('currentStudent'));
 let user = JSON.parse(localStorage.getItem('user'));
 document.addEventListener('DOMContentLoaded',function(){   
@@ -13,6 +15,22 @@ document.addEventListener('DOMContentLoaded',function(){
     document.querySelector('.logout').addEventListener('click',logout);
     loadLessons();
 });
+// Function to handle window resize
+function handleResize() {
+    let table = document.querySelectorAll('tr');
+    console.log('resize');
+    if (window.innerWidth <= 576) {
+        for(let i = 0 ; i < table.length; ++i){
+            table[i].style.display = "flex";
+            table[i].style.flexDirection = "column";
+        }
+    } else {
+        for(let i = 0 ; i < table.length; ++i){
+            table[i].style.display = "table-row";
+            table[i].style.flexDirection = "none";
+        }
+    }
+}
 function loadLessons(){
     currentStudent = JSON.parse(localStorage.getItem('currentStudent'));
     currentStudent = goToStudent(currentStudent.id);
@@ -150,6 +168,7 @@ function add(){
         tr.appendChild(td);
     }
     document.querySelector('tbody').appendChild(tr);
+    handleResize();
 }
 
 function edit(event){
