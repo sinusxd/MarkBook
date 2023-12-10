@@ -112,5 +112,8 @@ footer{
     input{
         width: 20rem;
     }
+    footer{
+        bottom: 10%;
+    }
 
 }

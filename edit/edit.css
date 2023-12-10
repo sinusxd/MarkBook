@@ -1,7 +1,17 @@
 body {
     font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    margin:0;
 }
-
+body{
+  height: 100vh;
+}
+.content{
+  flex:1;
+  margin: 5px;
+  height: 95vh;
+}
 table {
     width: 100%;
     border-collapse: collapse;
@@ -188,10 +198,7 @@ td:hover{
     background-color: rgba(255, 0, 0, 0.493) !important; 
     transition: background-color 0.2s;
   }
-  .test{
-    overflow-wrap: break-word;
-    -webkit-line-break: after-white-space;
-  }
+
 
   .buttons{
     background-color: rgb(37,99,235);
@@ -208,9 +215,12 @@ td:hover{
     transform: scale(1.1);
   }
 
-  /* Your existing CSS */
-
-/* Add this inside your existing CSS */
+  footer{
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    justify-content: center;
+}
 @media only screen and (max-width: 576px) {
   .page_header{
     display: flex;

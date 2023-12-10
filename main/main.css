@@ -110,3 +110,12 @@ td:hover{
 .blue{
     color:rgb(37,99,235);
 }
+footer{
+    display: flex;
+    position: absolute;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    left:0;
+    bottom: 0;
+}

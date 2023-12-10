@@ -105,5 +105,8 @@ footer{
     #email,#password{
         width: 20rem;
     }
+    footer{
+        bottom: 10%;
+    }
 
 }
