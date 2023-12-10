@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap');
 body {
-    margin-top:3rem;
     background-color:rgb(243 244 246);
     font-family: 'Outfit', sans-serif;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    height: 100%;
+    margin-top: 0;
 }
 h2{
     font-size: 2rem;
@@ -94,26 +95,30 @@ input:focus{
     transition: transform 2s;
     position: relative;
 }
-footer{
-    display: flex;
-    position: absolute;
-    align-items: center;
-    width: 100%;
-    justify-content: center;
-    left:0;
-    bottom: 0;
+html,
+body {
+	height: 100%;
 }
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+.content {
+	flex: 1 0 auto;
+}
+footer {
+	flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media only screen and (max-width: 767px) {
-    body{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    footer{
+        margin-bottom: 2rem;
     }
     input{
         width: 20rem;
     }
-    footer{
-        bottom: 10%;
-    }
-
 }

@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap');
 body{
-    font-family:Arial, Helvetica, sans-serif
+    font-family:Arial, Helvetica, sans-serif;
+    margin: 0;
+    margin-left:  10px;
+    margin-right: 10px;
 }
 .userName{
     display: flex;
@@ -90,17 +93,23 @@ tr:hover{
     background-color: ghostwhite;
     cursor: pointer;
 }
-footer{
-    display: flex;
-    position: absolute;
-    align-items: center;
-    width: 100%;
-    justify-content: center;
-    left:0;
-    bottom: 0;
-    
+body,html {
+	height: 100%;
 }
-
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+.content {
+	flex: 1 0 auto;
+}
+footer {
+	flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
 @media only screen and (max-width: 576px) {
     body{
         display: flex;
@@ -117,8 +126,5 @@ footer{
     .user{
         position: absolute;
         right: 0;
-    }
-    footer{
-        bottom: 10%;
     }
 }

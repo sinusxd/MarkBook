@@ -8,54 +8,56 @@
     <script src="edit.js"></script>
 </head>
 <body>
-    <div class = "content">
-        <div class = "page_header">
-            <img class = "logo" src="../src/logo.png">
-            <h1>Электронная зачётная книжка</h1>
-            <div class = "user">
-                <div class="userName">
-                    <img src="../src/user.png">
-                    <p>Username</p>
+    <div class = "wrapper">
+        <div class = "content">
+            <div class = "page_header">
+                <img class = "logo" src="../src/logo.png">
+                <h1>Электронная зачётная книжка</h1>
+                <div class = "user">
+                    <div class="userName">
+                        <img src="../src/user.png">
+                        <p>Username</p>
+                    </div>
+                    <div class = "logout">
+                        <img src="../src/logout.png">
+                        <p>Выйти</p>
+                    </div>
                 </div>
-                <div class = "logout">
-                    <img src="../src/logout.png">
-                    <p>Выйти</p>
+            </div>
+            <div class="info">
+                <p style="font-weight: bold;">Выбранный студент:</p>
+                <p class = "infoName">Username</p>
+                <div>
+                    <p class="blue">Группа:</p>
+                    <p class = "group">UserGroup</p>
+                </div>
+                <div>
+                    <p class="blue">Курс:</p>
+                    <p class = "course">1</p>
                 </div>
             </div>
+            <table class ="markbook">
+                <thead>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Наименование дисциплины</th>
+                        <th>Вид контроля</th>
+                        <th>Общее кол-во час.</th>
+                        <th>Семестр и год</th>
+                        <th>Оценка(балл)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <button class="Btn" onclick="add()">
+                <div class="sign"><p>+</p></div>
+                <div class="text">Добавить</div>
+            </button>
         </div>
-        <div class="info">
-            <p style="font-weight: bold;">Выбранный студент:</p>
-            <p class = "infoName">Username</p>
-            <div>
-                <p class="blue">Группа:</p>
-                <p class = "group">UserGroup</p>
-            </div>
-            <div>
-                <p class="blue">Курс:</p>
-                <p class = "course">1</p>
-            </div>
-        </div>
-        <table class ="markbook">
-            <thead>
-                <tr>
-                    <th>Дата</th>
-                    <th>Наименование дисциплины</th>
-                    <th>Вид контроля</th>
-                    <th>Общее кол-во час.</th>
-                    <th>Семестр и год</th>
-                    <th>Оценка(балл)</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-        <button class="Btn" onclick="add()">
-            <div class="sign"><p>+</p></div>
-            <div class="text">Добавить</div>
-        </button>
+        <footer>
+            <p>Колышкин А.В. ИКБО-20-22</p>
+        </footer>
     </div>
-    <footer>
-        <p>Колышкин А.В. ИКБО-20-22</p>
-    </footer>
 </body>
 </html>

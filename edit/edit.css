@@ -4,14 +4,7 @@ body {
     flex-direction: column;
     margin:0;
 }
-body{
-  height: 100vh;
-}
-.content{
-  flex:1;
-  margin: 5px;
-  height: 95vh;
-}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -215,12 +208,23 @@ td:hover{
     transform: scale(1.1);
   }
 
-  footer{
+  body,html {
+    height: 100%;
+  }
+  .wrapper {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    min-height: 100%;
+  }
+  .content {
+    flex: 1 0 auto;
+  }
+  footer {
     flex: 0 0 auto;
+    display: flex;
     justify-content: center;
-}
+    align-items: flex-end;
+  }
 @media only screen and (max-width: 576px) {
   .page_header{
     display: flex;

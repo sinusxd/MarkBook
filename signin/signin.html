@@ -9,28 +9,32 @@
     <script src="signin.js"></script>
 </head>
 <body>
-    <div class = "login">
-        <img class = "logo" src="../src/logo.png">
-        <h2>Регистрация</h2>
-        <form id ="login_form">
-            <div class = "role">
-                <p>Ваша роль: </p>
-                <div class = "selectRole">
-                    <div class = "student"><p>Студент</p></div>
-                    <div class = "teacher"><p>Преподаватель</p></div>
-                </div>
+    <div class = "wrapper">
+        <div class = "content">
+            <div class = "login">
+                <img class = "logo" src="../src/logo.png">
+                <h2>Регистрация</h2>
+                <form id ="login_form">
+                    <div class = "role">
+                        <p>Ваша роль: </p>
+                        <div class = "selectRole">
+                            <div class = "student"><p>Студент</p></div>
+                            <div class = "teacher"><p>Преподаватель</p></div>
+                        </div>
+                    </div>
+                    <input id = "surname" type="text" placeholder="Фамилия" required>
+                    <input id = "name" type="text" placeholder="Имя" required>
+                    <input id = "secondName" type="text" placeholder="Отчество" required>
+                    <input id = "email" type="email" placeholder="Почта" required>
+                    <input id = "password" type="password" placeholder="Пароль" required>
+                    <input id = "repeatPassword" type="password" placeholder="Повторите пароль" required>
+                    <button class = "reg">Зарегистрироваться</button>
+                </form>
             </div>
-            <input id = "surname" type="text" placeholder="Фамилия" required>
-            <input id = "name" type="text" placeholder="Имя" required>
-            <input id = "secondName" type="text" placeholder="Отчество" required>
-            <input id = "email" type="email" placeholder="Почта" required>
-            <input id = "password" type="password" placeholder="Пароль" required>
-            <input id = "repeatPassword" type="password" placeholder="Повторите пароль" required>
-            <button class = "reg">Зарегистрироваться</button>
-        </form>
+        </div>
+        <footer>
+            <p>Колышкин А.В. ИКБО-20-22</p>
+        </footer>
     </div>
-    <footer>
-        <p>Колышкин А.В. ИКБО-20-22</p>
-    </footer>
 </body>
 </html>
