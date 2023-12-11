@@ -206,8 +206,7 @@ function parseDate(inputDate) {
     let parsedDate = parts[2] + '-' + parts[1] + '-' + parts[0];
     return parsedDate;
 }
-function addToDB(event){
-    
+function addToDB(event){    
     let target = event.target.parentNode.parentNode.parentNode.childNodes;
     let good = true;
     for(let i = 0 ; i < 6; ++i){

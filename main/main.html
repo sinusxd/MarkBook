@@ -8,48 +8,52 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <div class = "page_header">
-        <img class = "logo" src="../src/logo.png">
-        <h1>Электронная зачётная книжка</h1>
-        <div class = "user">
-            <div class="userName">
-                <img src="../src/user.png">
+    <div class = "wrapper">
+        <div class = "content">
+            <div class = "page_header">
+                <img class = "logo" src="../src/logo.png">
+                <h1>Электронная зачётная книжка</h1>
+                <div class = "user">
+                    <div class="userName">
+                        <img src="../src/user.png">
+                        <p>Username</p>
+                    </div>
+                    <div class = "logout">
+                        <img src="../src/logout.png">
+                        <p>Выйти</p>
+                    </div>
+                </div>
+            </div>
+            <div class="info">
                 <p>Username</p>
+                <div>
+                    <p class="blue">Группа:</p>
+                    <p class = "group">UserGroup</p>
+                </div>
+                <div>
+                    <p class="blue">Курс:</p>
+                    <p class = "course">1</p>
+                </div>
             </div>
-            <div class = "logout">
-                <img src="../src/logout.png">
-                <p>Выйти</p>
-            </div>
+            <table class ="markbook">
+                <thead>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Наименование дисциплины</th>
+                        <th>Вид контроля</th>
+                        <th>Общее кол-во час.</th>
+                        <th>Семестр и год</th>
+                        <th>Оценка(балл)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
+        <footer>
+            <p>Колышкин А.В. ИКБО-20-22</p>
+        </footer>
     </div>
-    <div class="info">
-        <p>Username</p>
-        <div>
-            <p class="blue">Группа:</p>
-            <p class = "group">UserGroup</p>
-        </div>
-        <div>
-            <p class="blue">Курс:</p>
-            <p class = "course">1</p>
-        </div>
-    </div>
-    <table class ="markbook">
-        <thead>
-            <tr>
-                <th>Дата</th>
-                <th>Наименование дисциплины</th>
-                <th>Вид контроля</th>
-                <th>Общее кол-во час.</th>
-                <th>Семестр и год</th>
-                <th>Оценка(балл)</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-    <footer>
-        <p>Колышкин А.В. ИКБО-20-22</p>
-    </footer>
     
 </body>
 </html>

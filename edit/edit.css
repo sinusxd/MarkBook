@@ -3,6 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     margin:0;
+    background-color:rgb(243 244 246);
 }
 
 table {
@@ -13,6 +14,7 @@ table {
 
 table, th, td {
     border: 1px solid #ddd;
+    background-color: white;
 }
 
 th, td {

@@ -1,4 +1,4 @@
-
+window.addEventListener('resize', handleResize);
 function pasteLessons(){
     let user = JSON.parse(localStorage.getItem('user'));
     let lessons = user.lessons;
@@ -25,6 +25,7 @@ function pasteLessons(){
         tr.append(td);
         document.querySelector('tbody').append(tr);
     }
+    handleResize();
 }
 
 document.addEventListener('DOMContentLoaded',function(){
@@ -41,7 +42,25 @@ document.addEventListener('DOMContentLoaded',function(){
     pasteLessons();
         
 });
-
+function handleResize() {
+    let table = document.querySelectorAll('tr');
+    if (window.innerWidth <= 576) {
+        for(let i = 0 ; i < table.length; ++i){
+            table[i].style.display = "flex";
+            table[i].style.flexDirection = "column";
+            if(i == 0)
+                continue;
+            for(let j = 0 ; j < table[i].childNodes.length; ++j){
+                table[i].childNodes[j].style.height = "2rem";
+            }
+        }
+    } else {
+        for(let i = 0 ; i < table.length; ++i){
+            table[i].style.display = "table-row";
+            table[i].style.flexDirection = "none";
+        }
+    }
+}
 
 function logout(){
     localStorage.removeItem('user');

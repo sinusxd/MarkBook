@@ -23,54 +23,37 @@ document.addEventListener('DOMContentLoaded', function() {
         location.assign('../signin/signin.html');
     }
 });
-// Function to perform login when the form is submitted
+
 function login() {
     console.log('login');
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-
-    // Open the IndexedDB database
     const openDB = indexedDB.open("registrationDB", 1);
-
-    // Set the onsuccess event handler before opening the database
     openDB.onsuccess = function (event) {
         console.log('success');
         const db = event.target.result;
-
-        // Start a transaction and get the object store
         const transaction = db.transaction(["users"], "readonly");
         const objectStore = transaction.objectStore("users");
-
-        // Create a request to get the user by email
         const getUserRequest = objectStore.index("email").get(email);
-
-        // Handle the success or error of the request
         getUserRequest.onsuccess = function () {
             const user = getUserRequest.result;
-
             if (user) {
-                // User found, check the password
                 if (user.password === password) {
-                    // Passwords match, login successful
                     console.log("Login successful!");
-                    // Redirect to another page or perform other actions
                     localStorage.setItem('user',JSON.stringify(user));
                     if(user.group == null)
                         window.location.hre = "../tmain/tmain.html"
                     window.location.href = "../main/main.html";
                 } else {
-                    alert("Incorrect password. Please try again.");
+                    alert("Неверный пароль. Попробуйте снова.");
                 }
             } else {
-                alert("User not found. Please check your email.");
+                alert("Пользователь не найден. Проверьте вашу почту.");
             }
         };
-
         getUserRequest.onerror = function () {
-            alert("Error in login. Please try again.");
+            alert("Ошибка при входе. Попробуйте снова.");
         };
-
-        // Close the transaction
         transaction.oncomplete = function () {
             db.close();
         };

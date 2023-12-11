@@ -4,6 +4,7 @@ body{
     margin: 0;
     margin-left:  10px;
     margin-right: 10px;
+    background-color:rgb(243 244 246);
 }
 .userName{
     display: flex;
@@ -72,6 +73,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: white;
 }
 
 table, th, td {
