@@ -67,6 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
             student.style.backgroundColor = "rgb(37,99,235)";
             clicked = 1;
         }});
+    document.querySelector('.logo').addEventListener('click',function(){
+        window.location.assign('../login/index.html');
+    });
 });
 
 const openDB = indexedDB.open("registrationDB", 1);

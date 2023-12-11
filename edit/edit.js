@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded',function(){
     document.querySelector('.group').textContent = currentStudent.group;
     document.querySelector('.course').textContent = currentStudent.course;
     document.querySelector('.logout').addEventListener('click',logout);
+    document.querySelector('.logo').addEventListener('click',function(){
+        window.location.assign('../tmain/tmain.html');
+    });
     loadLessons();
 });
 // Function to handle window resize

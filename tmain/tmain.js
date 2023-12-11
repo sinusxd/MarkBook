@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', function(){
         this.location.assign('../main/main.html');
     document.querySelector('.userName p').textContent = user.surname + " " + user.name[0] + ". " + user.secondName[0] + ".";
     document.querySelector('.logout').addEventListener('click',logout);
+    document.querySelector('.logo').addEventListener('click',function(){
+        window.location.assign('../login/index.html');
+    });
     let openDB = indexedDB.open("registrationDB", 1);
     openDB.onupgradeneeded = function (event) {
         let db = event.target.result;
